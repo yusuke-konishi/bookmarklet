@@ -1,5 +1,5 @@
 javascript: (() => {
-  let titleUrl = document.getElementsByTagName('title')[0].textContent;
+  let titleUrl = document.title;
   titleUrl += '\n';
   titleUrl += location.href;
   prompt(titleUrl, titleUrl);
