@@ -1,6 +1,4 @@
 javascript: (() => {
-  let titleUrl = document.title;
-  titleUrl += '\n';
-  titleUrl += location.href;
+  const titleUrl = document.title + '\n' + location.href;
   prompt(titleUrl, titleUrl);
 })();
