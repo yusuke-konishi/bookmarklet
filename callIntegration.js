@@ -21,33 +21,32 @@
     script.onload = () => {
       callback();
     };
-  };
-
-  // define function to get object (case) record id of the primary tab by getFocusedPrimaryTabObjectId()
-  // https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedprimarytabobjectid.htm
-  function callGetFocusedPrimaryTabObjectId() {
-    sforce.console.getFocusedPrimaryTabObjectId(showObjectId);
   }
-  var showObjectId = function showObjectId(result) {
-    var caseRecordId = result.id;
-    console.log('case record id: ' + caseRecordId);
-  };
 
-  // define function to get id of the primary tab by getFocusedPrimaryTabId()
-  // https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedprimarytabid.htm
-  function callGetFocusedPrimaryTabId() {
-    sforce.console.getFocusedPrimaryTabId(showTabId);
-  }
-  var showTabId = function showTabId(result) {
-    var tabId = result.id
-    console.log('tab id: ' + tabId);
-  };
+  var caseRecordId;
+  var primaryTabId;
 
   // load Salesforce Console Integration Toolkit
   // https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_connecting.htm
   loadJs('/support/console/43.0/integration.js', () => {
     console.log(`integration.js is loaded`);
-    callGetFocusedPrimaryTabObjectId();
-    callGetFocusedPrimaryTabId();
+
+    // get object (case) record id of the primary tab by getFocusedPrimaryTabObjectId()
+    // https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedprimarytabobjectid.htm
+    sforce.console.getFocusedPrimaryTabObjectId((result) => {
+      caseRecordId = result.id;
+    });
+    console.log('case record id: ' + caseRecordId);
+
+    // get primary tab id by getFocusedPrimaryTabId()
+    // https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedprimarytabid.htm
+    sforce.console.getFocusedPrimaryTabId((result) => {
+      primaryTabId = result.id;
+    });
+    console.log('primary tab id: ' + primaryTabId);
+
+    // refresh primary tab by refreshPrimaryTabById()
+    // https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_refreshprimarytabbyid.htm
+    sforce.console.refreshPrimaryTabById(primaryTabId, true);
   });
 })();
