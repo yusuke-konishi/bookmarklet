@@ -26,6 +26,13 @@ javascript: (() => {
 
         /* refresh primary tab by refreshPrimaryTabById() */
         /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_refreshprimarytabbyid.htm */
-        sforce.console.refreshPrimaryTabById(primaryTabId, true);
+        sforce.console.refreshPrimaryTabById(primaryTabId, true, (result) => {
+            /* alert if the primary tab was not refreshed successfully */
+            if (result.success) {
+                console.log(`Primary tab was refreshed successfully.`);
+            } else {
+                alert(`Primary tab was not refreshed successfully.`);
+            }
+        });
     };
 })();
