@@ -1,7 +1,7 @@
 javascript: (() => {
     /* alert and exit if this program is executed out of ".salesforce.com/console" */
     if (!/\.salesforce\.com\/console/.test(location.href)) {
-        alert(`This program must be executed in ".salesforce.com/console".`);
+        alert(`This program must be executed in ".salesforce.com/console".\n\ncurrent url: ${location.href}`);
         return;
     }
     console.log(`current url: ${location.href}`);
@@ -22,7 +22,7 @@ javascript: (() => {
         sforce.console.getFocusedPrimaryTabId((result) => {
             primaryTabId = result.id;
         });
-        console.log('primary tab id: ' + primaryTabId);
+        console.log(`primary tab id: ${primaryTabId}`);
 
         /* refresh primary tab by refreshPrimaryTabById() */
         /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_refreshprimarytabbyid.htm */
