@@ -13,7 +13,7 @@ javascript: (() => {
     script.type = 'text/javascript';
     document.head.appendChild(script);
 
-    /* callback function executed after the <script> element is loaded */
+    /* callback function executed when the <script> element is loaded */
     script.onload = () => {
         let primaryTabId;
 
