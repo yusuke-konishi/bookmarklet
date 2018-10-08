@@ -18,11 +18,11 @@ javascript: (() => {
         };
     };
 
-    let primaryTabId;
-
     /* load Salesforce Console Integration Toolkit */
     /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_connecting.htm */
     loadJs('/support/console/43.0/integration.js', () => {
+        let primaryTabId;
+
         /* get primary tab id by getFocusedPrimaryTabId() */
         /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedprimarytabid.htm */
         sforce.console.getFocusedPrimaryTabId((result) => {
