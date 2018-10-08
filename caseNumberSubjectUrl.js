@@ -18,12 +18,11 @@ javascript: (() => {
         };
     };
 
-    let primaryTabObjectId;
-    let primaryTabId;
-
     /* load Salesforce Console Integration Toolkit */
     /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_connecting.htm */
     loadJs('/support/console/43.0/integration.js', () => {
+        let primaryTabObjectId;
+
         /* get primary tab object id by getFocusedPrimaryTabObjectId() */
         /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedprimarytabobjectid.htm */
         sforce.console.getFocusedPrimaryTabObjectId((result) => {
@@ -38,11 +37,18 @@ javascript: (() => {
             return;
         }
 
-        /* get primary tab id by getFocusedPrimaryTabId() */
-        /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedprimarytabid.htm */
-        sforce.console.getFocusedPrimaryTabId((result) => {
-            primaryTabId = result.id;
+        /* load Salesforce AJAX Toolkit */
+        /* https://developer.salesforce.com/docs/atlas.en-us.214.0.ajax.meta/ajax/sforce_api_ajax_connecting.htm */
+        loadJs('/soap/ajax/43.0/connection.js', () => {
+            /* get sid (session id) from cookie */
+            sforce.connection.sessionId = document.cookie.match(/(^|;\s*)sid=(.+?)(;|$)/)[2];
+
+            /* get Case record information from primary tab */
+            const queryResult = sforce.connection.query(`SELECT CaseNumber, Subject FROM Case WHERE Id = '${primaryTabObjectId}'`);
+            const records = queryResult.getArray('records');
+            const caseNumberSubjectUrl = `${records[0].CaseNumber}: ${records[0].Subject}\n${location.origin}/${primaryTabObjectId}`;
+
+            prompt(caseNumberSubjectUrl, caseNumberSubjectUrl);
         });
-        console.log(`primary tab id: ${primaryTabId}`);
     });
 })();
