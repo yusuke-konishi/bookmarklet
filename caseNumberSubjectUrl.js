@@ -43,7 +43,7 @@ javascript: (() => {
             /* get sid (session id) from cookie */
             sforce.connection.sessionId = document.cookie.match(/(^|;\s*)sid=(.+?)(;|$)/)[2];
 
-            /* get Case record information from primary tab */
+            /* get Case Number, Subject, Case URL from primary tab */
             const queryResult = sforce.connection.query(`SELECT CaseNumber, Subject FROM Case WHERE Id = '${primaryTabObjectId}'`);
             const records = queryResult.getArray('records');
             const caseNumberSubjectUrl = `${records[0].CaseNumber}: ${records[0].Subject}\n${location.origin}/${primaryTabObjectId}`;
