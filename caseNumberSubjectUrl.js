@@ -1,14 +1,14 @@
 javascript: (() => {
-    /* alert and exit if this program is executed out of ".salesforce.com/console" */
+    /* alert and exit if this program is executed out of "*.salesforce.com/console" */
     if (!/\.salesforce\.com\/console/.test(location.href)) {
-        alert(`This program must be executed in ".salesforce.com/console".\n\ncurrent url: ${location.href}`);
+        alert(`This program must be executed in "*.salesforce.com/console".\n\ncurrent url: ${location.href}`);
         return;
     }
     console.log(`current url: ${location.href}`);
 
-    /* define function to load external JavaScript file and set callback */
+    /* define function to load external JavaScript file and set callback for onload */
     function loadJs(jsUrl, callback) {
-        var script = document.createElement('script');
+        let script = document.createElement('script');
         script.src = jsUrl;
         script.type = 'text/javascript';
         document.head.appendChild(script);
@@ -38,11 +38,11 @@ javascript: (() => {
         });
         console.log(`primary tab object id: ${primaryTabObjectId}`);
 
-        /* alert and exit if the primary tab object id is not for Case (500*) */
+        /* alert and exit if the primary tab object id is not 500* (Case object id) */
+        /* https://help.salesforce.com/articleView?id=000005995&language=en_us&type=1 */
         if (!/^500/.test(primaryTabObjectId)) {
-            alert(`This program must be executed for Case record (id: 500*).\n\nrecord id: ${primaryTabObjectId}`);
+            alert(`This program can be executed when the primary tab is showing Case object (Case object id is 500*).\n\nprimary tab object id: ${primaryTabObjectId}`);
             return;
         }
-        console.log(`primary tab case record id: ${primaryTabObjectId}`);
     });
 })();
