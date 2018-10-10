@@ -38,6 +38,6 @@ javascript: (() => {
             } else {
                 alert(`Primary tab was not refreshed successfully.`);
             }
-        });
+        }, true);
     });
 })();
