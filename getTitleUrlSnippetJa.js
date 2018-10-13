@@ -4,8 +4,8 @@ javascript: (() => {
         + location.href + '\n'
         + '\n'
         + '<抜粋>\n'
-        + '---\n'
+        + '```\n'
         + window.getSelection().toString() + '\n'
-        + '---\n';
+        + '```\n';
     prompt(titleUrlSnippet, titleUrlSnippet);
 })();
