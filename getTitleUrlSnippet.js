@@ -1,8 +1,8 @@
 javascript: (() => {
     const titleUrlSnippet = document.title + '\n'
         + location.href + '\n'
-        + '---\n'
+        + '```\n'
         + window.getSelection().toString() + '\n'
-        + '---\n';
+        + '```\n';
     prompt(titleUrlSnippet, titleUrlSnippet);
 })();
