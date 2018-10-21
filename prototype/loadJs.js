@@ -7,13 +7,13 @@ javascript: (() => {
 
     console.log(`current url: ${location.href}`);
 
-    // get sid (session id) from cookie
+    /* get sid (session id) from cookie */
     var sid = document.cookie.match(/(^|;\s*)sid=(.+?)(;|$)/)[2];
     console.log(`session id: ${sid}`);
 
-    // define function to load external JavaScript file and set callback
+    /* define function to load external JavaScript file and set callback for onload */
     function loadJs(jsUrl, callback) {
-        var script = document.createElement('script');
+        let script = document.createElement('script');
         script.src = jsUrl;
         script.type = 'text/javascript';
         document.head.appendChild(script);
@@ -23,8 +23,8 @@ javascript: (() => {
         };
     };
 
-    // load Salesforce Console Integration Toolkit
-    // https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_connecting.htm
+    /* load Salesforce Console Integration Toolkit */
+    /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_connecting.htm */
     loadJs('/support/console/43.0/integration.js', () => {
         console.log(`integration.js is loaded`);
     });
