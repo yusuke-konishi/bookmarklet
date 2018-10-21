@@ -8,6 +8,6 @@ javascript: (() => {
     console.log(`current url: ${location.href}`);
 
     /* get sid (session id) from cookie */
-    var sid = document.cookie.match(/(^|;\s*)sid=(.+?)(;|$)/)[2];
+    const sid = document.cookie.match(/(^|;\s*)sid=(.+?)(;|$)/)[2];
     console.log(`session id: ${sid}`);
 })();
