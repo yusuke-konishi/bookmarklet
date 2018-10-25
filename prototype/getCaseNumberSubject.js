@@ -47,9 +47,9 @@ javascript: (() => {
             const queryString = `SELECT CaseNumber, Subject FROM Case WHERE Id = '${primaryTabObjectId}'`;
             const queryResult = sforce.connection.query(queryString);
             const records = queryResult.getArray('records');
-            const caseNumberSubjectUrl = `${records[0].CaseNumber}: ${records[0].Subject}\n${location.origin}/${primaryTabObjectId}`;
+            const caseNumberSubject = `${records[0].CaseNumber}_${records[0].Subject}.txt`;
 
-            prompt(caseNumberSubjectUrl, caseNumberSubjectUrl);
+            prompt(caseNumberSubject, caseNumberSubject);
         });
     });
 })();
