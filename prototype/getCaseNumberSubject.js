@@ -43,13 +43,13 @@ javascript: (() => {
             /* get sid (session id) from cookie */
             sforce.connection.sessionId = document.cookie.match(/(^|;\s*)sid=(.+?)(;|$)/)[2];
 
-            /* get Case Number, Subject, Case URL from primary tab */
-            const queryString = `SELECT CaseNumber, Subject FROM Case WHERE Id = '${primaryTabObjectId}'`;
+            /* get Case Number, Account Name from primary tab */
+            const queryString = `SELECT CaseNumber, Account.Name FROM Case WHERE Id = '${primaryTabObjectId}'`;
             const queryResult = sforce.connection.query(queryString);
             const records = queryResult.getArray('records');
-            const caseNumberSubject = `${records[0].CaseNumber}_${records[0].Subject}.txt`;
+            const caseNumberAccount = `${records[0].CaseNumber}_${records[0].Account.Name}.txt`;
 
-            prompt(caseNumberSubject, caseNumberSubject);
+            prompt(caseNumberAccount, caseNumberAccount);
         });
     });
 })();
