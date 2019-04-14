@@ -25,6 +25,7 @@ javascript: (() => {
         let subtabId;
         let primaryTabObjectId;
         let subtabObjectId;
+        let pageInfo;
 
         /* get primary tab id by getFocusedPrimaryTabId() */
         /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedprimarytabid.htm */
@@ -57,12 +58,12 @@ javascript: (() => {
         /* get page information from the current tab */
         /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getpageinfo.htm */
         sforce.console.getPageInfo(subtabId, (result) => {
-            stringPageInfo = result.pageInfo;
+            pageInfo = result.pageInfo;
         });
-        console.log(`page info: ${stringPageInfo}`)
+        console.log(`page info: ${pageInfo}`)
 
         /* parse page info to object name and url */
-        jsonPageInfo = JSON.parse(stringPageInfo);
+        jsonPageInfo = JSON.parse(pageInfo);
         console.log(jsonPageInfo);
 
         /* alert and exit if the primary tab object id is not 500* (Case object id) */
