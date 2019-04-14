@@ -22,6 +22,7 @@ javascript: (() => {
     /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_connecting.htm */
     loadJs('/support/console/43.0/integration.js', () => {
         let primaryTabObjectId;
+        let subtabObjectId;
 
         /* get primary tab object id by getFocusedPrimaryTabObjectId() */
         /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedprimarytabobjectid.htm */
@@ -29,6 +30,13 @@ javascript: (() => {
             primaryTabObjectId = result.id;
         });
         console.log(`primary tab object id: ${primaryTabObjectId}`);
+
+        /* get subtab object id by getFocusedSubtabObjectId() */
+        /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedsubtabobjectid.htm */
+        sforce.console.getFocusedSubtabObjectId((result) => {
+            subtabObjectId = result.id;
+        });
+        console.log(`subtab object id: ${subtabObjectId}`);
 
         /* alert and exit if the primary tab object id is not 500* (Case object id) */
         /* https://help.salesforce.com/articleView?id=000005995&language=en_us&type=1 */
