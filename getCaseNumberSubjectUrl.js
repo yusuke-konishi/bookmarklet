@@ -21,8 +21,24 @@ javascript: (() => {
     /* load Salesforce Console Integration Toolkit */
     /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_connecting.htm */
     loadJs('/support/console/43.0/integration.js', () => {
+        let primaryTabId;
+        let subtabId;
         let primaryTabObjectId;
         let subtabObjectId;
+
+        /* get primary tab id by getFocusedPrimaryTabId() */
+        /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedprimarytabid.htm */
+        sforce.console.getFocusedPrimaryTabId((result) => {
+            primaryTabId = result.id;
+        });
+        console.log(`primary tab id: ${primaryTabId}`);
+
+        /* get subtab id by getFocusedSubtabId() */
+        /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedsubtabid.htm */
+        sforce.console.getFocusedSubtabId((result) => {
+            subtabId = result.id;
+        });
+        console.log(`subtab id: ${subtabId}`);
 
         /* get primary tab object id by getFocusedPrimaryTabObjectId() */
         /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getfocusedprimarytabobjectid.htm */
@@ -40,10 +56,10 @@ javascript: (() => {
 
         /* alert and exit if the primary tab object id is not 500* (Case object id) */
         /* https://help.salesforce.com/articleView?id=000005995&language=en_us&type=1 */
-        if (!/^500/.test(primaryTabObjectId)) {
+        /* if (!/^500/.test(primaryTabObjectId)) {
             alert(`This program can be executed only when the primary tab is showing Case object (Case object id is 500*).\n\nprimary tab object id: ${primaryTabObjectId}`);
             return;
-        }
+        } */
 
         /* load Salesforce AJAX Toolkit */
         /* https://developer.salesforce.com/docs/atlas.en-us.214.0.ajax.meta/ajax/sforce_api_ajax_connecting.htm */
