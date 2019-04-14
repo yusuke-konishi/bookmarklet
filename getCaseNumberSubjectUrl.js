@@ -55,23 +55,21 @@ javascript: (() => {
         });
         console.log(`subtab object id: ${subtabObjectId}`);
 
-        /* get page information from the current tab */
+        /* get page information from focused tab */
         /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getpageinfo.htm */
         sforce.console.getPageInfo(subtabId, (result) => {
             pageInfo = result.pageInfo;
         });
-        console.log(`page info: ${pageInfo}`)
+        console.log(`page info: ${pageInfo}`);
+        const jsonPageInfo = JSON.parse(pageInfo);
 
-        /* parse page info to object name and url */
-        jsonPageInfo = JSON.parse(pageInfo);
-        console.log(jsonPageInfo);
+        /* prompt object name and url if fucused tab does not show case */
+        if (jsonPageInfo.displayName !== 'Case') {
+            const objectNameUrl = `${jsonPageInfo.objectName}\n${jsonPageInfo.url}`;
 
-        /* alert and exit if the primary tab object id is not 500* (Case object id) */
-        /* https://help.salesforce.com/articleView?id=000005995&language=en_us&type=1 */
-        /* if (!/^500/.test(primaryTabObjectId)) {
-            alert(`This program can be executed only when the primary tab is showing Case object (Case object id is 500*).\n\nprimary tab object id: ${primaryTabObjectId}`);
+            prompt(objectNameUrl, objectNameUrl);
             return;
-        } */
+        }
 
         /* load Salesforce AJAX Toolkit */
         /* https://developer.salesforce.com/docs/atlas.en-us.214.0.ajax.meta/ajax/sforce_api_ajax_connecting.htm */
