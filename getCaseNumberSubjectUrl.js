@@ -54,6 +54,17 @@ javascript: (() => {
         });
         console.log(`subtab object id: ${subtabObjectId}`);
 
+        /* get page information from the current tab */
+        /* https://developer.salesforce.com/docs/atlas.en-us.214.0.api_console.meta/api_console/sforce_api_console_getpageinfo.htm */
+        sforce.console.getPageInfo(subtabId, (result) => {
+            stringPageInfo = result.pageInfo;
+        });
+        console.log(`page info: ${stringPageInfo}`)
+
+        /* parse page info to object name and url */
+        jsonPageInfo = JSON.parse(stringPageInfo);
+        console.log(jsonPageInfo);
+
         /* alert and exit if the primary tab object id is not 500* (Case object id) */
         /* https://help.salesforce.com/articleView?id=000005995&language=en_us&type=1 */
         /* if (!/^500/.test(primaryTabObjectId)) {
