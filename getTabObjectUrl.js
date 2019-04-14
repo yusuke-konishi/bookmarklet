@@ -63,7 +63,15 @@ javascript: (() => {
         console.log(`page info: ${pageInfo}`);
         const jsonPageInfo = JSON.parse(pageInfo);
 
-        /* prompt object name and url if fucused tab does not show case */
+        /* prompt url if focused tab object does not have displayName */
+        if (jsonPageInfo.displayName === undefined) {
+            const objectUrl = jsonPageInfo.url;
+
+            prompt(objectUrl, objectUrl);
+            return;
+        }
+
+        /* prompt object name and url if focused tab does not show case */
         if (jsonPageInfo.displayName !== 'Case') {
             const objectNameUrl = `${jsonPageInfo.objectName}\n${jsonPageInfo.url}`;
 
