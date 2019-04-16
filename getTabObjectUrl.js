@@ -63,17 +63,16 @@ javascript: (() => {
         console.log(`page info: ${pageInfo}`);
         const jsonPageInfo = JSON.parse(pageInfo);
 
-        /* prompt url if focused tab object does not have displayName */
-        if (jsonPageInfo.displayName === undefined) {
-            const objectUrl = jsonPageInfo.url;
+        /* prompt object name and url if focused tab object is not Case */
+        if (!/^500/.test(subtabObjectId)) {
+            let objectNameUrl;
 
-            prompt(objectUrl, objectUrl);
-            return;
-        }
-
-        /* prompt object name and url if focused tab does not show case */
-        if (jsonPageInfo.displayName !== 'Case') {
-            const objectNameUrl = `${jsonPageInfo.objectName}\n${jsonPageInfo.url}`;
+            /* prompt url only if focused tab object does not have objectName */
+            if (jsonPageInfo.objectName === undefined) {
+                objectNameUrl = jsonPageInfo.url;
+            } else {
+                objectNameUrl = `${jsonPageInfo.displayName}: ${jsonPageInfo.objectName}\n${jsonPageInfo.url}`;
+            }
 
             prompt(objectNameUrl, objectNameUrl);
             return;
