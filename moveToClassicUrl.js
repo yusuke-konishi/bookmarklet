@@ -9,10 +9,9 @@ javascript: (() => {
     }
     console.log(`current url: ${location.href}`);
 
-    /* generate classic url with record id */
+    /* move to classic url with record id */
     const classicUrl = `${matchObject[1]}${matchObject[2]}?isdtp=vw`;
     console.log(`classic url: ${classicUrl}`);
     
-    /* move to classic url */
     location.href = classicUrl;
 })();
