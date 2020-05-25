@@ -5,6 +5,7 @@
 
 import sys
 import os
+import re
 
 # exit if no argument
 if len(sys.argv) < 2:
@@ -23,7 +24,12 @@ html_path = os.path.join(js_dir, html_file)
 js_str = ''
 
 with open(js_path) as js_obj:
-    for line in js_obj:
+    print('----- checking/replacing double quotes -----')
+    for i, line in enumerate(js_obj):
+        if re.match(r'.*"', line):
+            print('(before) {}: {}'.format(i + 1, line[:-1]))
+            line = line.replace('"', '&quot;')
+            print('(after)  {}: {}'.format(i + 1, line[:-1]))
         js_str += line[:-1]
 
 # generate html file with JavaScript string and bookmark name
@@ -39,6 +45,7 @@ html_str = """<!DOCTYPE NETSCAPE-Bookmark-file-1>
 with open(html_path, 'w') as html_obj:
     html_obj.write(html_str)
 
+print('----- path summary -----')
 print('js_path: {}'.format(js_path))
 print('js_dir: {}'.format(js_dir))
 print('js_file: {}'.format(js_file))
