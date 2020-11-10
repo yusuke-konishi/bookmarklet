@@ -17,27 +17,39 @@ javascript: (() => {
     /* get review list */
     const reviewList = document.querySelectorAll('div[jsname="fk8dgd"] > div');
 
-    /* get review details for 11 samples */
-    for (i = 0; i < 11; i++) {
-        console.log(`--- user ${i} ---`);
+    /* get review details split by semi-colon */
+    let reviewLines = 'Username;Star;Date;Helpful;Review\n';
+    let username;
+    let star;
+    let date;
+    let helpful;
+    let review;
 
-        const userName = reviewList[i].querySelector('span[class="X43Kjb"]').innerText.trim();
-        console.log(`user name: ${userName}`);
+    for (i = 0; i < reviewList.length; i++) {
+        username = reviewList[i].querySelector('span[class="X43Kjb"]').innerText.trim();
 
-        let star = reviewList[i].querySelector('div[class="pf5lIe"] > div').getAttribute('aria-label').trim();
+        star = reviewList[i].querySelector('div[class="pf5lIe"] > div').getAttribute('aria-label').trim();
         star = star.match(/(\d)\/5/)[1];
-        console.log(`star: ${star}`);
 
-        const date = reviewList[i].querySelector('span[class="p2TkOb"]').innerText.trim();
-        console.log(`date: ${date}`);
+        date = reviewList[i].querySelector('span[class="p2TkOb"]').innerText.trim();
 
-        const helpful = reviewList[i].querySelector('div[class="jUL89d y92BAb"]').innerText.trim();
-        console.log(`helpful: ${helpful}`);
+        helpful = reviewList[i].querySelector('div[class="jUL89d y92BAb"]').innerText.trim();
 
-        let review = reviewList[i].querySelector('span[jsname="fbQN7e"]').innerText.trim();
+        review = reviewList[i].querySelector('span[jsname="fbQN7e"]').innerText.trim();
         if (review === '') {
             review = reviewList[i].querySelector('span[jsname="bN97Pc"]').innerText.trim();
         }
-        console.log(`review: ${review}`);
+
+        reviewLines += `${username};${star};${date};${helpful};${review}\n`;
     }
+    console.log(reviewLines);
+
+    /* open download dialog with review lines */
+    const filename = `GooglePlayReviews.txt`;
+
+    let anchor = document.createElement('a');
+    anchor.href = `data:text/plain,${encodeURIComponent(reviewLines)}`;
+    anchor.download = filename;
+
+    anchor.click();
 })();
